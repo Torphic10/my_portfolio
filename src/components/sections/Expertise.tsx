@@ -1,0 +1,11 @@
+import { motion } from 'framer-motion';
+import { CalendarDays, PanelsTopLeft, ShoppingBag, ArrowUpRight } from 'lucide-react';
+import { services } from '@/data/content';
+import { useBooking } from '@/context/BookingContext';
+
+const icons = { CalendarDays, PanelsTopLeft, ShoppingBag };
+
+export default function Expertise() {
+  const { open: openBooking } = useBooking();
+  return <section id="services" className="border-b border-nova-line py-24 sm:py-32"><div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10"><div className="mb-12 max-w-2xl"><p className="mb-3 text-xs font-semibold uppercase tracking-[.18em] text-nova-lime">Services & Pricing</p><h2 className="text-4xl font-bold tracking-tight text-nova-white sm:text-6xl">The right product for the problem.</h2></div><div className="divide-y divide-nova-line border-y border-nova-line">{services.map((service, index) => { const Icon = icons[service.icon]; return <motion.div key={service.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .08 }} className="grid gap-5 py-8 sm:grid-cols-[56px_1fr_auto] sm:items-center sm:gap-8"><div className="flex h-12 w-12 items-center justify-center rounded-xl bg-nova-lime/10 text-nova-lime"><Icon size={23} /></div><div><h3 className="text-xl font-semibold text-nova-white sm:text-2xl">{service.title}</h3><p className="mt-2 max-w-2xl text-base leading-relaxed text-nova-muted">{service.description}</p></div><div className="text-xl font-semibold text-nova-white sm:text-right">{service.price}</div></motion.div>; })}</div><p className="mt-5 text-xs text-nova-muted">Final pricing depends on project requirements.</p><div className="mt-12 flex flex-col gap-4 rounded-2xl border border-nova-line bg-nova-surface p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"><div><h3 className="text-2xl font-semibold text-nova-white">Not Sure What Your Project Needs?</h3><p className="mt-2 text-sm text-nova-muted">A quick conversation can help make the next step clearer.</p></div><button onClick={openBooking} className="inline-flex items-center justify-center gap-2 rounded-full bg-nova-lime px-5 py-3 text-sm font-semibold text-nova-black">Book a Free 10-Minute Call <ArrowUpRight size={15} /></button></div></div></section>;
+}
